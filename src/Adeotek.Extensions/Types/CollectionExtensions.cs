@@ -2,16 +2,13 @@
 
 public static class CollectionExtensions
 {
-    public static IDictionary<TKey, TValue> EmptyIfNull<TKey, TValue>(this IDictionary<TKey, TValue>? dictionary) where TKey : notnull
-    {
-        return dictionary ?? new Dictionary<TKey, TValue>();
-    }
-    
-    public static IEnumerable<T> EmptyIfNull<T>(this IEnumerable<T>? enumerable)
-    {
-        return enumerable ?? Enumerable.Empty<T>();
-    }
-    
+    public static IDictionary<TKey, TValue> EmptyIfNull<TKey, TValue>(this IDictionary<TKey, TValue>? dictionary) 
+        where TKey : notnull => 
+        dictionary ?? new Dictionary<TKey, TValue>();
+
+    public static IEnumerable<T> EmptyIfNull<T>(this IEnumerable<T>? enumerable) => 
+        enumerable ?? Enumerable.Empty<T>();
+
     public static IEnumerable<IEnumerable<T>> Batch<T>(this IEnumerable<T> source, int size)
     {
         T[]? bucket = null;

@@ -12,6 +12,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{0D275980
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Adeotek.Extensions", "src\Adeotek.Extensions\Adeotek.Extensions.csproj", "{871F0CBE-46E2-4612-B906-4F97EF888C9D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Adeotek.Extensions.Tests", "tests\Adeotek.Extensions.Tests\Adeotek.Extensions.Tests.csproj", "{877B7559-18FB-4FC4-ABDB-2BE690BEB5E4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,6 +32,10 @@ Global
 		{871F0CBE-46E2-4612-B906-4F97EF888C9D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{871F0CBE-46E2-4612-B906-4F97EF888C9D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{871F0CBE-46E2-4612-B906-4F97EF888C9D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{877B7559-18FB-4FC4-ABDB-2BE690BEB5E4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{877B7559-18FB-4FC4-ABDB-2BE690BEB5E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{877B7559-18FB-4FC4-ABDB-2BE690BEB5E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{877B7559-18FB-4FC4-ABDB-2BE690BEB5E4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{FAE25232-9827-4031-A8FE-59DD4FBDD770} = {E16174B0-B098-42C5-B58E-4F96BEE5B46F}

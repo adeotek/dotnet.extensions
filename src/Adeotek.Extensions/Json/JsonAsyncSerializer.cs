@@ -6,60 +6,52 @@ namespace Adeotek.Extensions.Json;
 public static class JsonAsyncSerializer
 {
     /// <summary>
-    /// Serialize an object to a string asynchronously, with our preferred options applied (ignore null values, camelcase naming).
+    /// Asynchronously serialize an object to string.
     /// </summary>
-    /// <param name="objectToSerialize">Object instance to serialize.</param>
-    /// <param name="options">Optional JSON options if wanting to override default behavior.</param>
-    /// <returns>String after serialization.</returns>
-    public static async Task<string> SerializeAsync(object objectToSerialize, JsonSerializerOptions? options = null)
+    /// <param name="input">Object to be serialized</param>
+    /// <param name="options">Optional JSON options</param>
+    /// <returns>Serialized object string</returns>
+    public static async Task<string> SerializeAsync(object input, JsonSerializerOptions? options = null)
     {
         using var stream = new MemoryStream();
-        options ??= new JsonSerializerOptions
-        {
-            DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingDefault,
-            PropertyNamingPolicy = JsonNamingPolicy.CamelCase
-        };
-        await JsonSerializer.SerializeAsync(stream, objectToSerialize, objectToSerialize.GetType(), options);
+        await JsonSerializer.SerializeAsync(stream, input, input.GetType(), options ?? DefaultJsonSerializerOptions());
         stream.Position = 0;
         using var reader = new StreamReader(stream);
         return await reader.ReadToEndAsync();
     }
         
     /// <summary>
-    /// Serialize an object to a string asynchronously, with our preferred options applied (ignore null values, camelcase naming).
+    /// Asynchronously serialize an generic type object to string.
     /// </summary>
-    /// <typeparam name="T">Type of object to serialize.</typeparam>
-    /// <param name="objectToSerialize">Object instance to serialize.</param>
-    /// <param name="options">Optional JSON options if wanting to override default behavior.</param>
-    /// <returns>String after serialization.</returns>
-    public static async Task<string> SerializeAsync<T>(T objectToSerialize, JsonSerializerOptions? options = null)
+    /// <typeparam name="T">Generic Type of the object to be serialized</typeparam>
+    /// <param name="input">Object instance to serialize.</param>
+    /// <param name="options">Optional JSON options</param>
+    /// <returns>Serialized object string</returns>
+    public static async Task<string> SerializeAsync<T>(T input, JsonSerializerOptions? options = null)
     {
         using var stream = new MemoryStream();
-        options ??= new JsonSerializerOptions
-        {
-            DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingDefault,
-            PropertyNamingPolicy = JsonNamingPolicy.CamelCase
-        };
-        await JsonSerializer.SerializeAsync(stream, objectToSerialize, options);
+        await JsonSerializer.SerializeAsync(stream, input, options ?? DefaultJsonSerializerOptions());
         stream.Position = 0;
         using var reader = new StreamReader(stream);
         return await reader.ReadToEndAsync();
     }
         
     /// <summary>
-    /// Serialize an object to a string, with our preferred options applied (ignore null values, camelcase naming).
+    /// Serialize an generic type object to string.
     /// </summary>
-    /// <typeparam name="T">Type of object to serialize.</typeparam>
-    /// <param name="objectToSerialize">Object instance to serialize.</param>
-    /// <param name="options">Optional JSON options if wanting to override default behavior.</param>
-    /// <returns>String after serialization.</returns>
-    public static string Serialize<T>(T objectToSerialize, JsonSerializerOptions? options = null)
-    {
-        options ??= new JsonSerializerOptions
+    /// <typeparam name="T">Generic Type of the object to be serialized</typeparam>
+    /// <param name="input">Object instance to serialize.</param>
+    /// <param name="options">Optional JSON options</param>
+    /// <returns>Serialized object string</returns>
+    public static string Serialize<T>(T input, JsonSerializerOptions? options = null) =>
+        JsonSerializer.Serialize(input, options ?? DefaultJsonSerializerOptions());
+
+    public static JsonSerializerOptions DefaultJsonSerializerOptions() =>
+        new()
         {
             DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingDefault,
-            PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+            PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+            WriteIndented = false,
+            AllowTrailingCommas = true
         };
-        return JsonSerializer.Serialize(objectToSerialize, options);
-    }
 }
